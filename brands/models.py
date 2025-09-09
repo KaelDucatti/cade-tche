@@ -13,4 +13,4 @@ class Brand(models.Model):
 
     class Meta:
         ordering = ["-updated_at"]
-        verbose_name_plural = "brands"
+        verbose_name_plural = "Brands"

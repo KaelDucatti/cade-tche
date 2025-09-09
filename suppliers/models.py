@@ -13,4 +13,4 @@ class Supplier(models.Model):
 
     class Meta:
         ordering = ["-updated_at"]
-        verbose_name_plural = "suppliers"
+        verbose_name_plural = "Suppliers"

@@ -13,4 +13,4 @@ class Category(models.Model):
 
     class Meta:
         ordering = ["-updated_at"]
-        verbose_name_plural = "categories"
+        verbose_name_plural = "Categories"
