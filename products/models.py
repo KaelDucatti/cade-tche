@@ -6,12 +6,14 @@ from categories.models import Category
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=500)
     description = models.TextField()
-    serial_number = models.CharField(max_length=50, unique=True)
-    cost_price = models.DecimalField(10, 2)
-    selling_price = models.DecimalField(10, 2)
-    quantity = models.IntegerField()
+    serial_number = models.CharField(
+        max_length=50, unique=True, blank=True, null=True
+    )
+    cost_price = models.DecimalField(max_digits=20, decimal_places=2)
+    selling_price = models.DecimalField(max_digits=20, decimal_places=2)
+    quantity = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     brand = models.ForeignKey(
@@ -25,5 +27,5 @@ class Product(models.Model):
         return f"{self.title} {self.brand}"
 
     class Meta:
-        ordering = ["-updated_at"]
+        ordering = ["title"]
         verbose_name_plural = "Products"

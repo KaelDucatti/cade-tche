@@ -17,5 +17,5 @@ class Outflow(models.Model):
         return f"{self.product.title} - {self.quantity}un"
 
     class Meta:
-        ordering = ["-updated_at"]
+        ordering = ["-updated_at", "-created_at"]
         verbose_name_plural = "Outflows"
