@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Excluir Brand - SGE{% endblock %}
+
+{% block content %}
+<h1>Excluir Brand</h1>
+<p>Tem certeza que deseja excluir "{{ brand.name }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, excluir</button>
+    <a href="{% url 'brand_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

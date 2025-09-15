@@ -8,7 +8,7 @@
       <div class="collapse d-sm-block" id="menuCollapse">
         <ul class="nav flex-column align-items-start" id="menu">
           <li>
-            <a href="{% url 'home' %}" class="nav-link px-0 align-middle">
+            <a href="#" class="nav-link px-0 align-middle">
               <i class="bi bi-speedometer2 fs-4"></i>
               <span class="ms-1">Dashboard</span>
             </a>
@@ -20,10 +20,10 @@
                 <span class="ms-1">Fornecedores</span>
               </a>
             </li>
-          {% endif %}
+          {% endif %}  
           {% if perms.brands.view_brand %}
             <li>
-              <a href="#" class="nav-link px-0 align-middle">
+              <a href="{% url 'brand_list' %}" class="nav-link px-0 align-middle">
                 <i class="bi bi-shop fs-4"></i>
                 <span class="ms-1">Marcas</span>
               </a>

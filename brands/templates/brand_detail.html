@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ brand.name }} - SGE{% endblock %}
+
+{% block content %}
+<h1>{{ brand.name }}</h1>
+<p><strong>Descrição:</strong> {{ brand.description|default:"-" }}</p>
+<p><strong>Criado em:</strong> {{ brand.created_at|date:"Y-m-d H:i" }}</p>
+<p><strong>Atualizado em:</strong> {{ brand.updated_at|date:"Y-m-d H:i" }}</p>
+
+<div class="mt-3">
+    <a href="{% url 'brand_update' brand.id %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'brand_delete' brand.id %}" class="btn btn-danger">Excluir</a>
+    <a href="{% url 'brand_list' %}" class="btn btn-secondary">Voltar</a>
+</div>
+{% endblock %}
