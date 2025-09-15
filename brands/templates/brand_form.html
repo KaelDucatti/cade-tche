@@ -1,13 +1,21 @@
 {% extends "base.html" %}
-{% block title %}{% if brand %}Editar{% else %}Adicionar{% endif %} Brand - SGE{% endblock %}
+{% block title %}
+    {% if brand %}Editar
+    {% else %}Adicionar
+    {% endif %} Brand - SGE
+{% endblock %}
 
 {% block content %}
-<h1>{% if brand %}Editar{% else %}Adicionar{% endif %} Brand</h1>
+    <h1>
+        {% if brand %}Editar
+        {% else %}Adicionar
+        {% endif %} Brand
+    </h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Salvar</button>
-    <a href="{% url 'brand_list' %}" class="btn btn-secondary">Cancelar</a>
-</form>
+    <form form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{% url 'brand_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
 {% endblock %}
