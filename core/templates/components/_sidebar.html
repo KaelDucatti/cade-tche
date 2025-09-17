@@ -13,54 +13,54 @@
               <span class="ms-1">Dashboard</span>
             </a>
           </li>
-          {% if perms.suppliers.view_supplier %}
+          {% comment %} {% if perms.suppliers.view_supplier %} {% endcomment %}
             <li>
               <a href="#" class="nav-link px-0 align-middle">
                 <i class="bi bi-truck fs-4"></i>
                 <span class="ms-1">Fornecedores</span>
               </a>
             </li>
-          {% endif %}  
-          {% if perms.brands.view_brand %}
+          {% comment %} {% endif %}   {% endcomment %}
+          {% comment %} {% if perms.brands.view_brand %} {% endcomment %}
             <li>
               <a href="{% url 'brand_list' %}" class="nav-link px-0 align-middle">
                 <i class="bi bi-shop fs-4"></i>
                 <span class="ms-1">Marcas</span>
               </a>
             </li>
-          {% endif %}
-          {% if perms.categories.view_category %}
+          {% comment %} {% endif %} {% endcomment %}
+          {% comment %} {% if perms.categories.view_category %} {% endcomment %}
             <li>
               <a href="#" class="nav-link px-0 align-middle">
                 <i class="bi bi-tags fs-4"></i>
                 <span class="ms-1">Categorias</span>
               </a>
             </li>
-          {% endif %}
-          {% if perms.products.view_product %}
+          {% comment %} {% endif %} {% endcomment %}
+          {% comment %} {% if perms.products.view_product %} {% endcomment %}
             <li>
               <a href="#" class="nav-link px-0 align-middle">
                 <i class="bi bi-box-seam fs-4"></i>
                 <span class="ms-1">Produtos</span>
               </a>
             </li>
-          {% endif %}
-          {% if perms.inflows.view_inflow %}
+          {% comment %} {% endif %} {% endcomment %}
+          {% comment %} {% if perms.inflows.view_inflow %} {% endcomment %}
             <li>
               <a href="#" class="nav-link px-0 align-middle">
                 <i class="bi bi-arrow-down-left-square fs-4"></i>
                 <span class="ms-1">Entradas</span>
               </a>
             </li>
-          {% endif %}
-          {% if perms.outflows.view_outflow %}
+          {% comment %} {% endif %} {% endcomment %}
+          {% comment %} {% if perms.outflows.view_outflow %} {% endcomment %}
             <li>
               <a href="#" class="nav-link px-0 align-middle">
                 <i class="bi bi-arrow-up-right-square fs-4"></i>
                 <span class="ms-1">Saídas</span>
               </a>
             </li>
-          {% endif %}
+          {% comment %} {% endif %} {% endcomment %}
           <li class="nav-item">
             {% if user.is_authenticated %}
             <form action="#" method="post" id="logout-form" class="nav-link px-0 align-middle">

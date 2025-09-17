@@ -1,18 +1,24 @@
 {% extends "base.html" %}
 {% block title %}
-    {% if brand %}Editar
-    {% else %}Adicionar
-    {% endif %} Brand - SGE
+    {% if brand %}
+        Editar
+    {% else %}
+        Adicionar
+    {% endif %} 
+        Brand - SGE
 {% endblock %}
 
 {% block content %}
     <h1>
-        {% if brand %}Editar
-        {% else %}Adicionar
-        {% endif %} Brand
+        {% if brand %}
+            Editar
+        {% else %}
+            Adicionar
+        {% endif %} 
+            Brand
     </h1>
 
-    <form form method="post">
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-success">Salvar</button>
