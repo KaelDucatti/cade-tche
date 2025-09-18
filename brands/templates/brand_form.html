@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>
+    <h1 class="display-4">
         {% if brand %}
             Editar
         {% else %}
@@ -18,10 +18,15 @@
             Brand
     </h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a href="{% url 'brand_list' %}" class="btn btn-secondary">Cancelar</a>
-    </form>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" class="form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <a href="{% url 'brand_list' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
