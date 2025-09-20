@@ -11,6 +11,7 @@ class BrandForm(ModelForm):
             "name": TextInput({"class": "form-control"}),
             "description": Textarea({"class": "form-control", "rows": 3}),
         }
+        labels = {"name": "Nome", "description": "Descrição"}
 
     def clean_name(self):
         name = self.cleaned_data["name"]

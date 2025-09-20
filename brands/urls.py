@@ -8,22 +8,12 @@ from .views import (
     BrandUpdateView,
 )
 
+app_name = "brands"
+
 urlpatterns = [
-    path("brands/list/", BrandListView.as_view(), name="brand_list"),
-    path("brands/create/", BrandCreateView.as_view(), name="brand_create"),
-    path(
-        "brands/detail/<int:pk>/",
-        BrandDetailView.as_view(),
-        name="brand_detail",
-    ),
-    path(
-        "brands/delete/<int:pk>/",
-        BrandDeleteView.as_view(),
-        name="brand_delete",
-    ),
-    path(
-        "brands/update/<int:pk>/",
-        BrandUpdateView.as_view(),
-        name="brand_update",
-    ),
+    path("", BrandListView.as_view(), name="list"),
+    path("create/", BrandCreateView.as_view(), name="create"),
+    path("<int:pk>/", BrandDetailView.as_view(), name="detail"),
+    path("<int:pk>/delete/", BrandDeleteView.as_view(), name="delete"),
+    path("<int:pk>/update/", BrandUpdateView.as_view(), name="update"),
 ]

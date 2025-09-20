@@ -8,8 +8,8 @@
 <p><strong>Atualizado em:</strong> {{ brand.updated_at|date:"Y-m-d H:i" }}</p>
 
 <div class="mt-3">
-    <a href="{% url 'brand_update' brand.id %}" class="btn btn-warning">Editar</a>
-    <a href="{% url 'brand_delete' brand.id %}" class="btn btn-danger">Excluir</a>
-    <a href="{% url 'brand_list' %}" class="btn btn-secondary">Voltar</a>
+    <a href="{% url 'brands:update' brand.id %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'brands:delete' brand.id %}" class="btn btn-danger">Excluir</a>
+    <a href="{% url 'brands:list' %}" class="btn btn-secondary">Voltar</a>
 </div>
 {% endblock %}

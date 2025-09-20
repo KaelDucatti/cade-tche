@@ -4,7 +4,7 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Brands</h1>
-    <a href="{% url 'brand_create' %}" class="btn btn-primary">Adicionar Brand</a>
+    <a href="{% url 'brands:create' %}" class="btn btn-primary">Adicionar Brand</a>
 </div>
 
 <form method="get" class="mb-3">
@@ -32,9 +32,9 @@
             <td>{{ brand.created_at|date:"Y-m-d H:i" }}</td>
             <td>{{ brand.updated_at|date:"Y-m-d H:i" }}</td>
             <td>
-                <a href="{% url 'brand_detail' brand.id %}" class="btn btn-sm btn-info">Ver</a>
-                <a href="{% url 'brand_update' brand.id %}" class="btn btn-sm btn-warning">Editar</a>
-                <a href="{% url 'brand_delete' brand.id %}" class="btn btn-sm btn-danger">Excluir</a>
+                <a href="{% url 'brands:detail' brand.id %}" class="btn btn-sm btn-info">Ver</a>
+                <a href="{% url 'brands:update' brand.id %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'brands:delete' brand.id %}" class="btn btn-sm btn-danger">Excluir</a>
             </td>
         </tr>
         {% empty %}
