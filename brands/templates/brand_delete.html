@@ -1,13 +1,37 @@
 {% extends "base.html" %}
-{% block title %}Excluir Brand - SGE{% endblock %}
+
+{% block title %}Excluir {{ brand.name }} - SGE{% endblock %}
 
 {% block content %}
-<h1>Excluir Brand</h1>
-<p>Tem certeza que deseja excluir "{{ brand.name }}"?</p>
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0 text-danger">Excluir Marca</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <h5>Tem certeza?</h5>
+                        <p class="mb-0">Você está prestes a excluir a marca <strong>"{{ brand.name }}"</strong>. Esta ação não pode ser desfeita.</p>
+                    </div>
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Sim, excluir</button>
-    <a href="{% url 'brands:list' %}" class="btn btn-secondary">Cancelar</a>
-</form>
+                    <div class="mb-3">
+                        <strong>Nome:</strong> {{ brand.name }}<br>
+                        <strong>Descrição:</strong> {{ brand.description|default:"Sem descrição" }}<br>
+                        <strong>Criada em:</strong> {{ brand.created_at|date:"d/m/Y H:i" }}
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                            <a href="{% url 'brands:list' %}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,32 +1,206 @@
 {% extends "base.html" %}
+
 {% block title %}
-    {% if brand %}
-        Editar
+    {% if form.instance.pk %}
+        Editar {{ form.instance.name }} - SGE
     {% else %}
-        Adicionar
-    {% endif %} 
-        Brand - SGE
+        Nova Marca - SGE
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <h1 class="display-4">
-        {% if brand %}
-            Editar
-        {% else %}
-            Adicionar
-        {% endif %} 
-            Brand
-    </h1>
-
-    <div class="card">
-        <div class="card-body">
-            <form method="post" class="form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-success">Salvar</button>
-            <a href="{% url 'brands:list' %}" class="btn btn-secondary">Cancelar</a>
-            </form>
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                <div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-2">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'brands:list' %}">Marcas</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                {% if form.instance.pk %}Editar{% else %}Nova Marca{% endif %}
+                            </li>
+                        </ol>
+                    </nav>
+                    <h1 class="h3 mb-1">
+                        {% if form.instance.pk %}
+                            Editar Marca
+                        {% else %}
+                            Nova Marca
+                        {% endif %}
+                    </h1>
+                    <p class="text-muted mb-0">
+                        {% if form.instance.pk %}
+                            Atualize as informações da marca {{ form.instance.name }}
+                        {% else %}
+                            Preencha os dados para criar uma nova marca
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-tag me-2"></i>
+                        Informações da Marca
+                    </h5>
+                </div>
+                
+                <div class="card-body">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Nome da Marca -->
+                        <div class="mb-4">
+                            <label for="{{ form.name.id_for_label }}" class="form-label fw-semibold">
+                                Nome da Marca
+                                <span class="text-danger">*</span>
+                            </label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.name.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                Digite um nome único e descritivo para a marca
+                            </div>
+                        </div>
+
+                        <!-- Descrição -->
+                        <div class="mb-4">
+                            <label for="{{ form.description.id_for_label }}" class="form-label fw-semibold">
+                                Descrição
+                            </label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.description.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                Adicione uma descrição opcional para a marca
+                            </div>
+                        </div>
+
+                        <!-- Campos obrigatórios -->
+                        <div class="mb-4">
+                            <small class="text-muted">
+                                <span class="text-danger">*</span> Campos obrigatórios
+                            </small>
+                        </div>
+
+                        <!-- Botões de Ação -->
+                        <div class="d-flex flex-column flex-sm-row gap-2 justify-content-end">
+                            <a href="{% url 'brands:list' %}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-2"></i>
+                                {% if form.instance.pk %}
+                                    Atualizar Marca
+                                {% else %}
+                                    Salvar
+                                {% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar com dicas -->
+        <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">
+                        <i class="bi bi-lightbulb me-2"></i>
+                        Dicas
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Nome único</h6>
+                            <small class="text-muted">
+                                Escolha um nome que não exista no sistema
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Seja descritivo</h6>
+                            <small class="text-muted">
+                                Use nomes claros e fáceis de identificar
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-0">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Adicione descrição</h6>
+                            <small class="text-muted">
+                                Facilita a identificação e organização
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if form.instance.pk %}
+                <!-- Informações da marca existente -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Informações
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <small class="text-muted">Criada em</small>
+                                <div class="fw-bold">{{ form.instance.created_at|date:"d/m/Y" }}</div>
+                                <small class="text-muted">{{ form.instance.created_at|date:"H:i" }}</small>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted">Atualizada em</small>
+                                <div class="fw-bold">{{ form.instance.updated_at|date:"d/m/Y" }}</div>
+                                <small class="text-muted">{{ form.instance.updated_at|date:"H:i" }}</small>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <small class="text-muted">ID da marca</small>
+                            <div class="fw-bold">{{ form.instance.pk }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
