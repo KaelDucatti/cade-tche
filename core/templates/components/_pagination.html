@@ -1,0 +1,64 @@
+{% if page_obj.paginator.num_pages > 1 %}
+<nav aria-label="Navegação de páginas">
+    <ul class="pagination justify-content-center">
+        <!-- Primeira página -->
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                    Primeira
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- Página anterior -->
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                    Anterior
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- Páginas numeradas -->
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="page-item active">
+                    <span class="page-link">{{ num }}</span>
+                </li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                        {{ num }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Próxima página -->
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                    Próxima
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- Última página -->
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                    Última
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+
+    <!-- Informações da paginação -->
+    <div class="text-center text-muted mt-2">
+        <small>
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }} 
+            ({{ page_obj.paginator.count }} registro{{ page_obj.paginator.count|pluralize }})
+        </small>
+    </div>
+</nav>
+{% endif %}

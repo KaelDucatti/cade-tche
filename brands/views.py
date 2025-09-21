@@ -11,6 +11,7 @@ class BrandListView(ListView):
     model = Brand
     template_name = "brand_list.html"
     context_object_name = "brands"
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -30,17 +31,17 @@ class BrandCreateView(CreateView):
     model = Brand
     form_class = BrandForm
     template_name = "brand_form.html"
-    success_url = reverse_lazy("brand_list")
+    success_url = reverse_lazy("brands:list")
 
 
 class BrandUpdateView(UpdateView):
     model = Brand
     form_class = BrandForm
     template_name = "brand_form.html"
-    success_url = reverse_lazy("brand_list")
+    success_url = reverse_lazy("brands:list")
 
 
 class BrandDeleteView(DeleteView):
     model = Brand
     template_name = "brand_delete.html"
-    success_url = reverse_lazy("brand_list")
+    success_url = reverse_lazy("brands:list")
