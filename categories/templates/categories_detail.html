@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ category.name }} - SGE{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'categories:list' %}">Categorias</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+        </ol>
+    </nav>
+
+    <!-- Header com título e ações -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 mb-0">
+                <i class="fas fa-tag text-primary me-2"></i>
+                {{ category.name }}
+            </h1>
+            <small class="text-muted">Detalhes da Categoria</small>
+        </div>
+        
+        <!-- Dropdown de ações -->
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <i class="fas fa-cog me-1"></i> Ações
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item" href="{% url 'categories:update' category.pk %}">
+                        <i class="fas fa-edit text-warning me-2"></i> Editar
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-danger" href="{% url 'categories:delete' category.pk %}" 
+                       onclick="return confirm('Tem certeza que deseja excluir esta Categoria?')">
+                        <i class="fas fa-trash me-2"></i> Excluir
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Card principal com informações -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-secondary">
+                <div class="card-header bg-primary text-white border-secondary">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Informações da Categoria
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Descrição -->
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-2">Descrição</h6>
+                        {% if category.description %}
+                            <p class="fs-6 text-dark">{{ category.description }}</p>
+                        {% else %}
+                            <p class="text-muted fst-italic">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Nenhuma descrição fornecida
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Metadados em grid -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-dark border rounded">
+                                <h6 class="text-muted mb-1">
+                                    <i class="fas fa-calendar-plus me-1"></i>
+                                    Criado em
+                                </h6>
+                                <p class="mb-0 fw-semibold text-light">
+                                    {{ category.created_at|date:"d/m/Y H:i" }}
+                                </p>
+                                <small class="text-muted">
+                                    {{ category.created_at|timesince }} atrás
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-dark border rounded">
+                                <h6 class="text-muted mb-1">
+                                    <i class="fas fa-calendar-check me-1"></i>
+                                    Atualizado em
+                                </h6>
+                                <p class="mb-0 fw-semibold text-light">
+                                    {{ category.updated_at|date:"d/m/Y H:i" }}
+                                </p>
+                                <small class="text-muted">
+                                    {{ category.updated_at|timesince }} atrás
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar com ações rápidas -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-secondary">
+                <div class="card-header border-secondary">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-bolt me-2"></i>
+                        Ações Rápidas
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'categories:update' category.pk %}" class="btn btn-warning">
+                            <i class="fas fa-edit me-2"></i> Editar Categoria
+                        </a>
+                        <a href="{% url 'categories:delete' category.pk %}" 
+                           class="btn btn-outline-danger"
+                           onclick="return confirm('Tem certeza que deseja excluir esta Categoria?')">
+                            <i class="fas fa-trash me-2"></i> Excluir Categoria
+                        </a>
+                        <hr>
+                        <a href="{% url 'categories:list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i> Voltar à Lista
+                        </a>
+                        <a href="{% url 'categories:create' %}" class="btn btn-success">
+                            <i class="fas fa-plus me-2"></i> Nova Categoria
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de estatísticas (opcional) -->
+            <div class="card shadow-sm mt-3">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Estatísticas
+                    </h6>
+                </div>
+                <div class="card-body text-center">
+                    <!-- Você pode adicionar estatísticas relacionadas aqui -->
+                    <div class="mb-2">
+                        <span class="badge bg-info fs-6">ID: {{ category.pk }}</span>
+                    </div>
+                    <small class="text-muted">
+                        Categoria registrada no sistema
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast para feedback (opcional) -->
+{% if messages %}
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        {% for message in messages %}
+            <div class="toast show" role="alert">
+                <div class="toast-header">
+                    <strong class="me-auto">
+                        {% if message.tags == 'success' %}
+                            <i class="fas fa-check-circle text-success me-1"></i>
+                        {% elif message.tags == 'error' %}
+                            <i class="fas fa-exclamation-circle text-danger me-1"></i>
+                        {% endif %}
+                        SGE
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

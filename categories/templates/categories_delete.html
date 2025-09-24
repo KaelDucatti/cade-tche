@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Excluir {{ category.name }} - SGE{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0 text-danger">Excluir Categoria</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <h5>Tem certeza?</h5>
+                        <p class="mb-0">Você está prestes a excluir a categoria <strong>"{{ category.name }}"</strong>. Esta ação não pode ser desfeita.</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Nome:</strong> {{ category.name }}<br>
+                        <strong>Descrição:</strong> {{ category.description|default:"Sem descrição" }}<br>
+                        <strong>Criada em:</strong> {{ category.created_at|date:"d/m/Y H:i" }}
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                            <a href="{% url 'categories:list' %}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

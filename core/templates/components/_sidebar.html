@@ -31,7 +31,7 @@
           {% comment %} {% endif %} {% endcomment %}
           {% comment %} {% if perms.categories.view_category %} {% endcomment %}
             <li>
-              <a href="#" class="nav-link px-0 align-middle">
+              <a href="{% url 'categories:list' %}" class="nav-link px-0 align-middle">
                 <i class="bi bi-tags fs-4"></i>
                 <span class="ms-1">Categorias</span>
               </a>
