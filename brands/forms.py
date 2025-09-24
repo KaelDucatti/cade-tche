@@ -18,7 +18,7 @@ class BrandForm(ModelForm):
 
         queryset = Brand.objects.filter(name__iexact=name)
 
-        if self.instace.pk:
+        if self.instance.pk:
             queryset = queryset.exclude(pk=self.instance.pk)
 
         if queryset.exists():
