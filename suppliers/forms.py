@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea, TextInput
 
 from .models import Supplier
 
@@ -7,6 +7,10 @@ class SupplierForm(ModelForm):
     class Meta:
         model = Supplier
         fields = ["name", "description"]
+        widgets = {
+            "name": TextInput({"class": "form-control"}),
+            "description": Textarea({"class": "form-control"}),
+        }
 
     def clean_name(self):
         name = self.cleaned_data.get("name")
