@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Excluir {{ supplier.name }} - SGE{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0 text-danger">Excluir Fornecedor</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <h5>Tem certeza?</h5>
+                        <p class="mb-0">Você está prestes a excluir a Fornecedor <strong>"{{ supplier.name }}"</strong>. Esta ação não pode ser desfeita.</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Nome:</strong> {{ supplier.name }}<br>
+                        <strong>Descrição:</strong> {{ supplier.description|default:"Sem descrição" }}<br>
+                        <strong>Criada em:</strong> {{ supplier.created_at|date:"d/m/Y H:i" }}
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                            <a href="{% url 'categories:list' %}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
