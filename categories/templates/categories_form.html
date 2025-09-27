@@ -18,7 +18,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-2">
                             <li class="breadcrumb-item">
-                                <a href="{% url 'brands:list' %}">Categorias</a>
+                                <a href="{% url 'categories:list' %}">Categorias</a>
                             </li>
                             <li class="breadcrumb-item active">
                                 {% if form.instance.pk %}Editar{% else %}Nova Categoria{% endif %}
@@ -104,7 +104,7 @@
 
                         <!-- Botões de Ação -->
                         <div class="d-flex flex-column flex-sm-row gap-2 justify-content-end">
-                            <a href="{% url 'brands:list' %}" class="btn btn-outline-secondary">
+                            <a href="{% url 'categories:list' %}" class="btn btn-outline-secondary">
                                 <i class="bi bi-arrow-left me-2"></i>
                                 Cancelar
                             </a>
