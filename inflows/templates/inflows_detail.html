@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Entrada #{{ inflow.pk }} - SGE{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'inflows:list' %}">Entradas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Entrada #{{ inflow.pk }}</li>
+        </ol>
+    </nav>
+
+    <!-- Header com título -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 mb-0">
+                <i class="bi bi-box-arrow-in-down text-success me-2"></i>
+                Entrada de Estoque #{{ inflow.pk }}
+            </h1>
+            <small class="text-muted">Detalhes da entrada de produto no estoque</small>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Card principal com informações -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-success">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Informações da Entrada
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Produto -->
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-2">
+                            <i class="bi bi-box me-1"></i>
+                            Produto
+                        </h6>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                 style="width: 50px; height: 50px;">
+                                <i class="bi bi-box text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">{{ inflow.product.title }}</h5>
+                                {% if inflow.product.category %}
+                                    <span class="badge bg-secondary">{{ inflow.product.category.title }}</span>
+                                {% endif %}
+                                {% if inflow.product.description %}
+                                    <p class="text-muted mb-0 mt-2">{{ inflow.product.description|truncatewords:20 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fornecedor -->
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-2">
+                            <i class="bi bi-building me-1"></i>
+                            Fornecedor
+                        </h6>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-info rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                 style="width: 50px; height: 50px;">
+                                <i class="bi bi-building text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">{{ inflow.supplier.name }}</h5>
+                                {% if inflow.supplier.phone %}
+                                    <p class="text-muted mb-0">
+                                        <i class="bi bi-telephone me-1"></i>{{ inflow.supplier.phone }}
+                                    </p>
+                                {% endif %}
+                                {% if inflow.supplier.email %}
+                                    <p class="text-muted mb-0">
+                                        <i class="bi bi-envelope me-1"></i>{{ inflow.supplier.email }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quantidade -->
+                    <div class="mb-4">
+                        <div class="p-3 bg-info bg-opacity-10 border border-info rounded text-center">
+                            <h6 class="text-info mb-1">
+                                <i class="bi bi-hash me-1"></i>
+                                Quantidade Entrada
+                            </h6>
+                            <p class="mb-0 fs-2 fw-bold text-info">
+                                {{ inflow.quantity }} unidades
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Metadados em grid -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-dark border rounded">
+                                <h6 class="text-muted mb-1">
+                                    <i class="bi bi-calendar-plus me-1"></i>
+                                    Data da Entrada
+                                </h6>
+                                <p class="mb-0 fw-semibold text-light">
+                                    {{ inflow.created_at|date:"d/m/Y H:i" }}
+                                </p>
+                                <small class="text-muted">
+                                    {{ inflow.created_at|timesince }} atrás
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-dark border rounded">
+                                <h6 class="text-muted mb-1">
+                                    <i class="bi bi-calendar-check me-1"></i>
+                                    Última Atualização
+                                </h6>
+                                <p class="mb-0 fw-semibold text-light">
+                                    {{ inflow.updated_at|date:"d/m/Y H:i" }}
+                                </p>
+                                <small class="text-muted">
+                                    {{ inflow.updated_at|timesince }} atrás
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Descrição -->
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-2">
+                            <i class="bi bi-chat-text me-1"></i>
+                            Descrição da Entrada
+                        </h6>
+                        <div class="p-3 bg-light border rounded">
+                            <p class="mb-0">{{ inflow.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar com ações e informações extras -->
+        <div class="col-lg-4">
+            <!-- Ações Rápidas -->
+            <div class="card shadow-sm border-success mb-3">
+                <div class="card-header border-success">
+                    <h6 class="card-title mb-0">
+                        <i class="bi bi-lightning me-2"></i>
+                        Ações Rápidas
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'inflows:list' %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i> Voltar às Entradas
+                        </a>
+                        <a href="{% url 'inflows:create' %}" class="btn btn-success">
+                            <i class="bi bi-plus-lg me-2"></i> Nova Entrada
+                        </a>
+                        {% if inflow.product %}
+                        <hr>
+                        <a href="{% url 'products:detail' inflow.product.pk %}" class="btn btn-outline-primary">
+                            <i class="bi bi-box me-2"></i> Ver Produto
+                        </a>
+                        {% endif %}
+                        {% if inflow.supplier %}
+                        <a href="{% url 'suppliers:detail' inflow.supplier.pk %}" class="btn btn-outline-info">
+                            <i class="bi bi-building me-2"></i> Ver Fornecedor
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de informações extras -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">
+                        <i class="bi bi-info-square me-2"></i>
+                        Informações Extras
+                    </h6>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <span class="badge bg-success fs-6">ID: {{ inflow.pk }}</span>
+                    </div>
+                    
+                    <!-- Status da entrada -->
+                    <div class="mb-3">
+                        <span class="badge bg-success bg-opacity-75 fs-6">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Entrada Processada
+                        </span>
+                    </div>
+
+                    <small class="text-muted">
+                        Entrada registrada e processada no sistema
+                    </small>
+
+                    <!-- Estoque atual do produto -->
+                    {% if inflow.product %}
+                    <hr>
+                    <div class="text-center">
+                        <h6 class="text-muted mb-1">Estoque Atual do Produto</h6>
+                        <h4 class="text-primary mb-0">
+                            {{ inflow.product.quantity }} unidades
+                        </h4>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast para feedback (opcional) -->
+{% if messages %}
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        {% for message in messages %}
+            <div class="toast show" role="alert">
+                <div class="toast-header">
+                    <strong class="me-auto">
+                        {% if message.tags == 'success' %}
+                            <i class="bi bi-check-circle text-success me-1"></i>
+                        {% elif message.tags == 'error' %}
+                            <i class="bi bi-exclamation-circle text-danger me-1"></i>
+                        {% endif %}
+                        SGE
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

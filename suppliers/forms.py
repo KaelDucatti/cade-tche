@@ -11,6 +11,10 @@ class SupplierForm(ModelForm):
             "name": TextInput({"class": "form-control"}),
             "description": Textarea({"class": "form-control"}),
         }
+        labels = {
+            "name": "Nome",
+            "description": "Descrição",
+        }
 
     def clean_name(self):
         name = self.cleaned_data.get("name")
