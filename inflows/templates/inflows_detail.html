@@ -162,12 +162,12 @@
                         <a href="{% url 'inflows:create' %}" class="btn btn-success">
                             <i class="bi bi-plus-lg me-2"></i> Nova Entrada
                         </a>
-                        {% if inflow.product %}
+                        {% comment %} {% if inflow.product %}
                         <hr>
                         <a href="{% url 'products:detail' inflow.product.pk %}" class="btn btn-outline-primary">
                             <i class="bi bi-box me-2"></i> Ver Produto
                         </a>
-                        {% endif %}
+                        {% endif %} {% endcomment %}
                         {% if inflow.supplier %}
                         <a href="{% url 'suppliers:detail' inflow.supplier.pk %}" class="btn btn-outline-info">
                             <i class="bi bi-building me-2"></i> Ver Fornecedor
